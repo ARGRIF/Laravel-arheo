@@ -43,7 +43,7 @@ class LoginController extends Controller
     {
         if ($user->status == 0) {
             $this->guard()->logout();
-            return back()->with('error', 'You need to confirm your account. Please check your email.');
+            return back()->with('error', 'Для входу вам потрібно отримати дозвіл від адміністратора.');
         }
         return redirect()->intended($this->redirectPath());
     }
