@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTopographiesTable extends Migration
+class CreateCulturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateTopographiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('topographies', function (Blueprint $table) {
+        Schema::create('cultures', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('color');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateTopographiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topographies');
+        Schema::dropIfExists('cultures');
     }
 }

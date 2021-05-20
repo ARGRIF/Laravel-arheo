@@ -15,6 +15,12 @@ class CreatePassportsTable extends Migration
     {
         Schema::create('passports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('find_id')->constrained('finds');
+            $table->foreignId('author_id')->constrained('users');
+            $table->string('investigator');
+            $table->string('identify_the_circumstances');
+            $table->text('description');
+            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }

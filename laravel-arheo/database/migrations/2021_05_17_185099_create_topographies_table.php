@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFindsTable extends Migration
+class CreateTopographiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +13,11 @@ class CreateFindsTable extends Migration
      */
     public function up()
     {
-        Schema::create('finds', function (Blueprint $table) {
+        Schema::create('topographies', function (Blueprint $table) {
             $table->id();
-            $table->float('name');
-
+            $table->string('name');
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE finds ADD COLUMN users integer[]  DEFAULT(\'{}\')');
-
     }
 
     /**
@@ -31,6 +27,6 @@ class CreateFindsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finds');
+        Schema::dropIfExists('topographies');
     }
 }

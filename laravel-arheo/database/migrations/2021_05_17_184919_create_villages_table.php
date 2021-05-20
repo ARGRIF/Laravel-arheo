@@ -15,6 +15,9 @@ class CreateVillagesTable extends Migration
     {
         Schema::create('villages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('district_id')->constrained('districts');
+            $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }

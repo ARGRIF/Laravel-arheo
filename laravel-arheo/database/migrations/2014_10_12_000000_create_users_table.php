@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('position_at_work');
             $table->string('specialization');
-            $table->integer('status')->default(0);
+            $table->boolean('status')->default(0);
             $table->boolean('is_admin')->default(0);
             $table->string('email')->unique();
             $table->string('phone');
