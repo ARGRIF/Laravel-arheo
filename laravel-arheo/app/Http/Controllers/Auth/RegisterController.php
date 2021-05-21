@@ -85,8 +85,10 @@ class RegisterController extends Controller
         if($request->hasfile('avatar')){
             $avatar = $request->file('avatar');
             $filename = time().'.jpg';
-            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename) );
+            $avatar_size = getimagesize($avatar);
+            Image::make($avatar)->crop($avatar_size[0], $avatar_size[0])->resize(500, 500)->save( public_path('/uploads/avatars/' . $filename) );
         }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

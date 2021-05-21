@@ -5,6 +5,7 @@ use App\Http\Controllers\ObjectController;
 use App\Http\Controllers\PassportController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -28,6 +29,14 @@ Route::get('/legend', function () {
 });
 
 Auth::routes();
+
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
