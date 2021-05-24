@@ -46,4 +46,4 @@ Route::resource('user', UserController::class)->names('user');
 Route::resource('post', PostController::class)->names('post');
 Route::resource('object', ObjectController::class)->names('object');
 Route::resource('find', FindController::class)->names('find');
-Route::resource('passport', PassportController::class)->names('user');
+Route::resource('passport', PassportController::class)->names('passport');

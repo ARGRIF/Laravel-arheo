@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -63,19 +64,39 @@ class UserController extends Controller
     public function edit($id)
     {
         $item = User::findOrFail($id);
+
         return view('user.edit', compact('item'));
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        //
+
+        $item = User::find($id);
+        $data = $request->all();
+        $result = $item
+            ->fill($data)
+            ->save();
+
+        if ($result) {
+            return redirect()
+                ->route('user.edit', $item->id)
+                ->with(['success' => 'Данні успішно збережені']);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Помилка зберігання'])
+                ->withInput();
+        }
+
+
+
     }
 
     /**

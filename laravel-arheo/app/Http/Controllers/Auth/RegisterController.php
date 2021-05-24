@@ -66,10 +66,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => [ 'required','regex:/^(\+380)[0-9]{9}$/'],
-            'position_at_work' => ['required', 'string', 'max:255'],
-            'specialization' => ['required', 'string', 'max:255'],
+            'position_at_work' => ['required', 'string','min:10', 'max:255'],
+            'specialization' => ['required', 'string','min:10', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'avatar' => 'required',
+            'avatar' => [],
         ]);
     }
 
@@ -87,6 +87,9 @@ class RegisterController extends Controller
             $filename = time().'.jpg';
             $avatar_size = getimagesize($avatar);
             Image::make($avatar)->crop($avatar_size[0], $avatar_size[0])->resize(500, 500)->save( public_path('/uploads/avatars/' . $filename) );
+        }
+        else{
+            $filename = 'default.jpg';
         }
 
         return User::create([
