@@ -112,6 +112,7 @@
       <path value="$PROJECT_DIR$/laravel-arheo/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/laravel-arheo/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/laravel-arheo/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/laravel-arheo/vendor/kesmenenver/servicelayer" />
     </include_path>
   </component>
   <component name="PhpUnit">

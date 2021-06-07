@@ -36,6 +36,8 @@ class CreateFindsTable extends Migration
             $table->foreignId('post_id')->constrained('posts');
             $table->foreignId('category_id')->constrained('categories');
 
+            $table->foreignId('topography_id')->constrained('topographies');
+
             $table->string('find_images')->nullable();
 
             $table->text('description')->nullable();

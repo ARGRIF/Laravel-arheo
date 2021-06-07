@@ -30,6 +30,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/kesmenenver/servicelayer" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/laravel/sail" />
       <excludeFolder url="file://$MODULE_DIR$/laravel-arheo/vendor/laravel/tinker" />
@@ -121,5 +122,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery-3.2.1" level="application" />
+    <orderEntry type="library" name="select2" level="application" />
+    <orderEntry type="library" name="jquery-3.5.1" level="application" />
+    <orderEntry type="library" name="popper.js" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="summernote" level="application" />
   </component>
 </module>

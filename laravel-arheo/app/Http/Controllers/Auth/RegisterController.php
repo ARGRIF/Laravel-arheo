@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Services\ImageService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -27,11 +28,21 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    /**
+     * @var ImageService
+     */
+    private $imageService;
+
+    /**
+     * @var ImageService
+     */
+
+
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($this->create($request)));
 
         return redirect()->route('home');
     }
@@ -46,11 +57,12 @@ class RegisterController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param ImageService $imageService
      */
-    public function __construct()
+    public function __construct(ImageService $imageService)
     {
         $this->middleware('guest');
+        $this->imageService = $imageService;
     }
 
     /**
@@ -76,30 +88,16 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param Request $request
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        $request = app('request');
-        if($request->hasfile('avatar')){
-            $avatar = $request->file('avatar');
-            $filename = time().'.jpg';
-            $avatar_size = getimagesize($avatar);
-            Image::make($avatar)->crop($avatar_size[0], $avatar_size[0])->resize(500, 500)->save( public_path('/uploads/avatars/' . $filename) );
-        }
-        else{
-            $filename = 'default.jpg';
-        }
+        $data = $request->all();
+        //dd($data);
+        $data['avatar'] = $this->imageService->save($request->avatar);
+        $data['password'] = Hash::make($data['password']);
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'position_at_work' => $data['position_at_work'],
-            'specialization' => $data['specialization'],
-            'password' => Hash::make($data['password']),
-            'avatar' => $filename,
-        ]);
+        return User::create($data);
     }
 }

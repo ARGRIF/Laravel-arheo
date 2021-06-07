@@ -31,4 +31,33 @@ p{
     margin-left: 15px;
 }
 
+.map{
+    height: 20em;
+}
 
+.btn-nav-secondary{
+    color: #fff !important;
+    padding: unset !important;
+    width: 2em !important;
+    height: 2em !important;
+    background-color: #6c757d00;
+    border-color: #6c757d00;
+}
+
+.btn-nav-secondary:hover{
+    color: #fff !important;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-nav-secondary:active{
+    color: #fff !important;
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+
+.btn-nav-secondary:focus{
+    background-color: #5a6268;
+    border-color: #545b62;
+    box-shadow: 0 0 0 0.1rem rgb(130 138 145 / 50%) !important;
+}

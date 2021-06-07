@@ -22,10 +22,12 @@ class CreateObjectsTable extends Migration
             $table->foreignId('post_id')->constrained('posts');
             $table->foreignId('culture_id')->constrained('cultures');
 
-            $table->string('involved_person')->nullable();;
+            $table->foreignId('topography_id')->constrained('topographies');
+
+            $table->string('involved_person')->nullable();
             $table->jsonb('location_area');
 
-            $table->text('description')->nullable();;
+            $table->text('description')->nullable();
 
 
             $table->timestamps();

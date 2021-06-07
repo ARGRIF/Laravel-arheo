@@ -40,7 +40,7 @@ Route::get('logout', function ()
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+Route::get('get-village-list','App\Http\Controllers\DropdownController@getVillagesList');
 
 Route::resource('user', UserController::class)->names('user');
 Route::resource('post', PostController::class)->names('post');

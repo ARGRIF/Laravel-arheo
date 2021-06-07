@@ -23,9 +23,11 @@ class CreatePostsTable extends Migration
 
             $table->string('involved_person')->nullable();
 
-            $table->jsonb('location_area');
-            $table->jsonb('photos')->nullable();
+            $table->text('location_area');
 
+
+
+            $table->string('photos')->default('default.jpg');
             $table->text('description')->nullable();
 
             $table->timestamps();
