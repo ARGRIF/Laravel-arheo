@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if ($user->status == true) {
+        if ($user->status !== true) {
             $this->guard()->logout();
             return back()->with('error', 'Для входу вам потрібно отримати дозвіл від адміністратора.');
         }

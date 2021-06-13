@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use App\Traits\Postgres\Model\Traits\PostgresArray;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Find extends Model
+class Objects extends Model
 {
     use HasFactory;
     /**
@@ -17,22 +16,12 @@ class Find extends Model
     protected $fillable = [
         'name',
         'code',
-        'fund_code',
-        'place_of_storage',
-        'find_number',
-        'date_of_find',
-        'culture_id',
-        'dating',
-        'involved_person',
-        'length',
-        'width',
-        'height',
-        'weight',
-        'object_id',
+        'date_of_detection',
         'post_id',
-        'material_id',
-        'category_id',
-        'find_images',
+        'involved_person',
+        'culture_id',
+        'topography_id',
+        'photos',
         'lat',
         'lng',
         'description',

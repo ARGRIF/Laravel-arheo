@@ -2,6 +2,8 @@ p{
     margin-bottom: 0px!important;
 }
 
+
+
 .block-account-item{
     margin-bottom: .75rem!important;
 }
@@ -32,8 +34,18 @@ p{
 }
 
 .map{
-    height: 20em;
+    height: 25em;
+
 }
+
+.chart-container {
+    width: 600px !important;
+    height: 300px !important;
+}
+
+
+
+
 
 .btn-nav-secondary{
     color: #fff !important;

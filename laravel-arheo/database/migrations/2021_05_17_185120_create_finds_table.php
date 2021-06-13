@@ -18,10 +18,13 @@ class CreateFindsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            $table->integer('find_number');
             $table->string('fund_code')->nullable();
             $table->string('place_of_storage')->nullable();
             $table->date('date_of_find');
             $table->foreignId('culture_id')->constrained('cultures');
+            $table->foreignId('material_id')->constrained('materials');
+            $table->foreignId('category_id')->constrained('categories');
             $table->string('dating');
 
             $table->string('involved_person')->nullable();
@@ -32,13 +35,10 @@ class CreateFindsTable extends Migration
 
             $table->float('weight', 8, 2)->nullable();
 
-            $table->foreignId('object_id')->constrained('objects');
+            $table->integer('object_id')-> nullable();
             $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('category_id')->constrained('categories');
 
-            $table->foreignId('topography_id')->constrained('topographies');
 
-            $table->string('find_images')->nullable();
 
             $table->text('description')->nullable();
 
@@ -49,6 +49,7 @@ class CreateFindsTable extends Migration
         });
         DB::statement('ALTER TABLE finds ADD COLUMN authors integer[]  DEFAULT(\'{}\')');
 
+        DB::statement('ALTER TABLE finds ADD COLUMN photos varchar[]  DEFAULT(\'{}\')');
     }
 
     /**

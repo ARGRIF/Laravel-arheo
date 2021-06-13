@@ -41,6 +41,9 @@ Route::get('logout', function ()
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('get-village-list','App\Http\Controllers\DropdownController@getVillagesList');
+Route::get('get-post-list','App\Http\Controllers\DropdownController@getPostsList');
+Route::get('get-object-list','App\Http\Controllers\DropdownController@getObjectsList');
+Route::get('get-category-list','App\Http\Controllers\DropdownController@getCategoriesList');
 
 Route::resource('user', UserController::class)->names('user');
 Route::resource('post', PostController::class)->names('post');

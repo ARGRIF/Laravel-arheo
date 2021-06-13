@@ -19,13 +19,16 @@ class CreateObjectsTable extends Migration
             $table->string('name');
             $table->string('code')->nullable();
             $table->date('date_of_detection');
+            $table->integer('finds_quantity')->default(0);
             $table->foreignId('post_id')->constrained('posts');
             $table->foreignId('culture_id')->constrained('cultures');
 
             $table->foreignId('topography_id')->constrained('topographies');
 
             $table->string('involved_person')->nullable();
-            $table->jsonb('location_area');
+
+            $table->float('lat', 10, 6)->nullable();
+            $table->float('lng', 10, 6)->nullable();
 
             $table->text('description')->nullable();
 
@@ -33,6 +36,7 @@ class CreateObjectsTable extends Migration
             $table->timestamps();
 
         });
+        DB::statement('ALTER TABLE objects ADD COLUMN photos varchar[]  DEFAULT(\'{}\')');
         DB::statement('ALTER TABLE objects ADD COLUMN authors integer[]  DEFAULT(\'{}\')');
     }
 

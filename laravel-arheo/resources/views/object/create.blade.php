@@ -14,18 +14,18 @@
 
     <div class=" no-gutters py-4 p-4 bg-body-dark">
         <div class="row px-4">
-            <h1>Додавання нової пам’ятки</h1>
+            <h1>Додавання нового об'єкта</h1>
         </div>
         <div class="px-3">
 
-            <form name="post_create" enctype="multipart/form-data" method="POST" action="{{ route('post.store') }}">
+            <form name="post_create" enctype="multipart/form-data" method="POST" action="{{ route('object.store') }}">
 
                 @csrf
                 <div class="form">
 
                     <h3 class="col-12">Розташування:</h3>
                     <div class="row px-6">
-                        <div class="form-group col-3 px-2">
+                        <div class="form-group col-2 ">
                             <label for="inputState">Область</label>
                             <select  id="inputState" class="form-control">
                                 @foreach($regions as $value => $regions )
@@ -33,7 +33,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-3 px-2">
+                        <div class="form-group col-3 ">
                             <label for="inputState">Район</label>
                             <select  id="id_select2_districts" class="form-control">
                                 <option> </option>
@@ -43,19 +43,37 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-3 px-2">
+                        <div class="form-group col-3 ">
                             <label for="inputState">Населений пункт</label>
 
-                            <select name="village_id" id="id_select2_villages" class="form-control">
-
+                            <select  id="id_select2_villages" class="form-control">
+                                <option> </option>
                             </select>
                         </div>
+
+                        <div class="form-group col-3 px-2 ">
+                            <label for="inputState">Назва пам'ятки</label>
+                            <div class="col-12">
+                                <select name="post_id" id="id_select2_posts" class="form-control">
+
+                                </select>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <h3 class="col-12">Основні відомості:</h3>
                     <div class="row px-6">
                         <div class="form-group col-3 px-2 ">
-                            <label for="inputState">Назва пам'ятки</label>
+                            <label for="inputState">Назва</label>
+                            <div class="">
+                                <input id="name_input" type="text" name="name" required="required" autocomplete="position_at_work" autofocus="autofocus" class="form-control  bg-white">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-3 px-2 ">
+                            <label for="inputState">Назва обєкту</label>
                             <div class="">
                                 <input readonly id="name" type="text" name="name" required="required" autocomplete="position_at_work" autofocus="autofocus" class="form-control  bg-white">
                             </div>
@@ -71,27 +89,25 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                                 <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
                             </select>
                         </div>
 
-                        <div class="form-group col-2 px-2 ">
+                        <div class="form-group col-3 px-2 ">
                             <label for="inputState">Індексація</label>
-                            <div class="col-12">
+                            <div class="">
                                 <input readonly id="code" type="text" name="code" value="" required="required" autocomplete="position_at_work" autofocus="autofocus" class="form-control bg-white">
                             </div>
                         </div>
+                        <div class="w-100"></div>
                         <div class="form-group col-2 px-2">
                             <label for="inputState">Дата відкриття</label>
                             <input type="date" class="form-control" id="date" name="date_of_detection" placeholder="Дата" required>
                         </div>
-                        <div class="w-100"></div>
+
                         <div class="form-group col-4 px-2">
                             <label for="inputState">Топографія</label>
-                            <select name="topographies[]" class="form-control" id="id_select2_topographies" multiple="multiple">
+                            <select name="topography_id" class="form-control" id="id_select2_topographies" >
+                                <option> </option>
                                 @foreach($topographies as $value => $topographies )
                                     <option value="{{$value}}">{{$topographies}}</option>
                                 @endforeach
@@ -100,7 +116,8 @@
 
                         <div class="form-group col-5 px-2">
                             <label for="inputState">Культурна принадлежність</label>
-                            <select name="cultures[]" class="form-control" id="id_select2_cultures" multiple="multiple">
+                            <select name="culture_id" class="form-control" id="id_select2_cultures" >
+                                <option> </option>
                                 @foreach($cultures as $value => $cultures )
                                     <option value="{{$value}}">{{$cultures}}</option>
                                 @endforeach
@@ -121,10 +138,10 @@
                         </div>
 
 
-                        <div class="form-group col-5 px-2 ">
+                        <div class="form-group col-4 px-2 ">
                             <label for="inputState">Особа причетна</label>
-                            <div class="">
-                                <input id="name" type="text" name="involved_person" value=""  autocomplete="position_at_work" autofocus="autofocus" class="form-control ">
+                            <div class="col-12">
+                                <input id="name" type="text" name="involved_person" value="" autocomplete="position_at_work" autofocus="autofocus" class="form-control ">
                             </div>
                         </div>
 
@@ -134,17 +151,14 @@
 
                     <h3 class="col-12">Карта:</h3>
                     <div class="row px-6">
-                        <input name="location_area" id="location_area" type="hidden" >
-                        <input name="location_square" id="location_square" type="hidden" >
+                        <input name="lat" id="lat" type="hidden" >
+                        <input name="lng" id="lng" type="hidden" >
                         <div id="map" class="col-8 map ml-2" >
 
                         </div>
                         <script type="text/javascript">
 
                             function initMap() {
-
-
-
 
                                 var lat = 50.395757;
                                 var lng = 25.763518;
@@ -158,41 +172,22 @@
                                 }
                                 var map = new google.maps.Map(document.getElementById("map"), opt);
 
-                                const triangleCoords = [
-                                    { lat: lat + 0.0005, lng: lng },
-
-                                    { lat: lat + 0.00025, lng: lng - 0.0007 },
-                                    { lat: lat - 0.00025, lng: lng - 0.0007},
-
-
-                                    { lat: lat - 0.0005, lng: lng },
-
-                                    { lat: lat - 0.00025, lng: lng + 0.0007},
-                                    { lat: lat + 0.00025, lng: lng + 0.0007 },
-
-                                ];
-
-                                // Construct the polygon.
-                                const bermudaTriangle = new google.maps.Polygon({
-                                    paths: triangleCoords,
-                                    strokeColor: "#FF0000",
-                                    strokeOpacity: 0.8,
-                                    strokeWeight: 2,
-                                    fillColor: "#FF0000",
-                                    fillOpacity: 0.35,
+                                const marker_object =   new google.maps.Marker({
+                                    position: {lat: lat, lng: lng},
+                                    map,
+                                    title: "Hello World!",
                                     editable: true,
                                     draggable: true,
                                 });
-                                bermudaTriangle.setMap(map);
+
+
+
 
                                 var a =document.getElementById('save');
 
                                 a.onclick = function() {
-                                    var polypath = bermudaTriangle.getPath();
-                                    var encodeString = google.maps.geometry.encoding.encodePath(polypath);
-                                    var square = google.maps.geometry.spherical.computeArea(polypath);
-                                    document.getElementById('location_square').value = ((square  / 10002).toFixed(2)) ;
-                                    document.getElementById('location_area').value = encodeString;
+                                    document.getElementById('lat').value = marker_object.getPosition(marker_object).lat().toFixed(6);
+                                    document.getElementById('lng').value = marker_object.getPosition(marker_object).lng().toFixed(6);
                                 }
 
                             }
@@ -204,9 +199,9 @@
 
 
 
-                    <h3 class="col-12 pt-3">Опис і додаткові відомості:</h3>
+                    <h3 class="col-12">Опис і додаткові відомості:</h3>
                     <div class="row px-6">
-                            <div class="form-group col-9">
+                            <div class="form-group col-8">
                                 <textarea class="summernote" name="description"></textarea>
                             </div>
 
@@ -235,8 +230,26 @@
             var district_code ='XX.';
             var village_code ='X';
             var post_code ='X';
+            var object_code  ='X';
 
+            $('.summernote').summernote({
+                height: 250
+            });
 
+            $('#id_select2_cultures').select2({
+                tags: true,
+                placeholder: "Не обрано",
+            });
+
+            $('#id_select2_users').select2({
+                    tags: true
+                }
+            );
+
+            $('#id_select2_topographies').select2({
+                tags: true,
+                placeholder: "Не обрано",
+            });
 
 
             $('#id_select2_number').select2({
@@ -257,30 +270,40 @@
 
             })
 
+            $('#id_select2_posts').select2({
+                tags: true,
+                placeholder: "Не обрано",
+                //allowClear: true
+
+            })
 
 
             $('#id_select2_villages ').change(function () {
-                var vilageID =$('#id_select2_villages option:selected').text();
-
                 var vilageCode =$('#id_select2_villages').children(":selected").attr("name"); //=$('#id_select2_villages option:selected').val();
-                document.getElementById('name').value= vilageID + ' - ' +post_code;
                 village_code = vilageCode;
-                document.getElementById('code').value= district_code +'.'+ village_code + '.X.' + post_code + '.X';
+                document.getElementById('code').value= district_code +'.'+ village_code + '.X.X.X';
 
             })
 
             $('#id_select2_districts ').change(function () {
                 var districtID =$('#id_select2_districts').children(":selected").attr("id");
                 district_code = districtID;
-                document.getElementById('code').value= district_code +'.'+ village_code + '.X.' + post_code + '.X';
+                document.getElementById('code').value= district_code +'.X.X.X.X';
 
             })
 
             $('#id_select2_number').change(function () {
-                post_code =$('#id_select2_number option:selected').text();
-                var vilageID =$('#id_select2_villages option:selected').text();
-                document.getElementById('name').value= vilageID  + ' - ' +post_code;
-                document.getElementById('code').value= district_code +'.'+ village_code + '.X.' + post_code + '.X';
+                var object_code =$('#id_select2_number option:selected').text();
+                document.getElementById('name').value = document.getElementById('name_input').value + ' - ' +object_code;
+                document.getElementById('code').value= district_code +'.'+ village_code + '.X.'  + post_code + '.' + object_code;
+
+            })
+
+            $('#id_select2_posts').change(function () {
+                var postCode =$('#id_select2_posts option:selected').text();
+                post_code = postCode.toString().slice(-1);
+
+                document.getElementById('code').value= district_code +'.'+ village_code + '.X.'  + post_code + '.' + object_code;
 
             })
 
@@ -288,9 +311,6 @@
 
             $('#id_select2_districts').change(function () {
                 var districtId = $(this).val();
-                var districtCode = $(this).children(":selected").attr("id");
-//alert(districtCode);
-
 
                 if(districtId){
                     $.ajax({
@@ -312,6 +332,34 @@
                             }
                         }
                     });
+                }else{
+                    $("#id_select2_villages").empty();
+                    $("#id_select2_posts").empty();
+                }
+            });
+            $('#id_select2_villages').on('change',function(){
+                var villageID = $(this).val();
+                if(villageID){
+                    $.ajax({
+                        type:"GET",
+                        dataType: 'json',
+                        url:"{{url('get-post-list')}}?village_id="+villageID,
+                        success:function(res){
+                            if(res){
+                                $("#id_select2_posts").empty();
+                                $("#id_select2_posts").append('<option> </option>');
+                                $.each(res,function(key,value){
+                                    //$("#id_select2_posts").append('<option value="'+key+'">'+value+'</option>');
+                                    $("#id_select2_posts").append('<option  value="'+value['id']+'"  name="'+value['code']+'" >'+value['name']+'</option>');
+                                });
+
+                            }else{
+                                $("#id_select2_posts").empty();
+                            }
+                        }
+                    });
+                }else{
+                    $("#id_select2_posts").empty();
                 }
             });
 
@@ -335,22 +383,7 @@
 
 
 
-            $('.summernote').summernote({
-                height: 250
-            });
 
-            $('#id_select2_cultures').select2({
-                tags: true
-            });
-
-            $('#id_select2_users').select2({
-                    tags: true
-                }
-            );
-
-            $('#id_select2_topographies').select2({
-                tags: true
-            });
         });
     </script>
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Post;
 use App\Models\User;
+use App\Traits\Model\Traits\PostgresArray;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -52,7 +54,22 @@ class UserController extends Controller
     public function show($id)
     {
         $item = User::findOrFail($id);
-        return view('user.show', compact('item'));
+//$posts = Post::pluck('authors', 'id')->toArray();
+        $posts = Post::all();
+        $post_arr = [];
+        foreach ($posts as $value){
+            $value['authors'] =  PostgresArray::accessPgArray($value['authors']);
+            $post_arr = array_merge($post_arr, $value['authors']);
+        }
+        $post_arr = array_count_values($post_arr);
+        $post_quantity = $post_arr[$id - 1];
+
+
+
+
+
+        return view('user.show', compact('item'))
+            ->with(compact($post_quantity, 'post_quantity'));
     }
 
     /**

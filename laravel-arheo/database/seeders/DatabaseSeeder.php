@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(VillagesTableSeeder::class);
         $this->call(CulturesTableSeeder::class);
         $this->call(TopographiesTableSeeder::class);
+        $this->call(MAterialsTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(PostsTableSeeder::class);
     }
 }

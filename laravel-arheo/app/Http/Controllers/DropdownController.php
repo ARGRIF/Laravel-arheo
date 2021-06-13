@@ -24,11 +24,30 @@ class DropdownController extends Controller
 
 
 
-    public function getCityList(Request $request)
+    public function getPostsList(Request $request)
     {
-        $cities = DB::table("cities")
-            ->where("state_id",$request->state_id)
-            ->pluck("name","id");
-        return response()->json($cities);
+        $posts = DB::table("posts")
+            ->where("village_id",$request->village_id)
+            //->select("name","id")
+            ->get(['id','name','code','finds_quantity']);
+        return response()->json($posts);
     }
+
+    public function getObjectsList(Request $request)
+    {
+        $posts = DB::table("objects")
+            ->where("post_id",$request->post_id)
+            ->get(['id','name','code']);
+        return response()->json($posts);
+    }
+
+
+    public function getCategoriesList(Request $request)
+    {
+        $posts = DB::table("categories")
+            ->where("material_id",$request->material_id)
+            ->get(['id','name']);
+        return response()->json($posts);
+    }
+
 }

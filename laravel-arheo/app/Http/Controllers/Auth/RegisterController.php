@@ -78,8 +78,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => [ 'required','regex:/^(\+380)[0-9]{9}$/'],
-            'position_at_work' => ['required', 'string','min:10', 'max:255'],
-            'specialization' => ['required', 'string','min:10', 'max:255'],
+            'position_at_work' => ['required', 'string','min:5', 'max:255'],
+            'specialization' => ['required', 'string','min:5', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'avatar' => [],
         ]);
@@ -94,8 +94,12 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $data = $request->all();
-        //dd($data);
-        $data['avatar'] = $this->imageService->save($request->avatar);
+        //dd($request->avatar);
+        if($request->avatar){
+            //dd($request->avatar);
+            $data['avatar'] = $this->imageService->save($request->avatar, 'avatars', true);
+        }
+
         $data['password'] = Hash::make($data['password']);
 
         return User::create($data);

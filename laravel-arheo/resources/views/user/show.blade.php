@@ -61,7 +61,10 @@
                             </p>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary btn-block" onclick="location.href='{{ url("/user/".Auth::user()->id.'/edit') }}'">Редагувати</button>
+                    @if(Request::url() == url("/user/".Auth::user()->id))
+                        <button type="button" class="btn btn-secondary btn-block" onclick="location.href='{{ url("/user/".Auth::user()->id.'/edit') }}'">Редагувати</button>
+                    @endif
+
                     <!-- END Trip -->
                 </div>
                 <!-- END Side Content -->
@@ -81,7 +84,7 @@
                                         </div>
                                         <div class="w-100"></div>
                                         <div class="user-item-block-content-p font-w500 mb-1">
-                                            234
+                                            {{$post_quantity}}
                                         </div>
                                     </div>
                                 </div>

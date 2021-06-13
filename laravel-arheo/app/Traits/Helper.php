@@ -1,5 +1,5 @@
 <?php
-namespace App\Traits\Postgres;
+namespace App\Traits;
 
 class Helper
 {

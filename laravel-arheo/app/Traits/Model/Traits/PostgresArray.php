@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Traits\Postgres\Model\Traits;
+namespace App\Traits\Model\Traits;
 
+use App\Traits\Helper;
 use Illuminate\Database\Eloquent\Builder;
-use Smiarowski\Postgres\Helper;
+
 
 trait PostgresArray
 {
